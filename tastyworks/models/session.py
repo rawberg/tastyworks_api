@@ -7,12 +7,12 @@ LOGGER = logging.getLogger(__name__)
 
 
 class TastyAPISession(object):
-    def __init__(self, username: str, password: str, API_url=None):
+    def __init__(self, username: str, password: str, API_url=None, session_token=None):
         self.API_url = API_url if API_url else 'https://api.tastyworks.com'
         self.username = username
         self.password = password
-        self.logged_in = False
-        self.session_token = self._get_session_token()
+        self.logged_in = True if session_token else False
+        self.session_token = session_token if session_token else self._get_session_token()
 
     def _get_session_token(self):
         if self.logged_in and self.session_token:
